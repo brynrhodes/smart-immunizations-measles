@@ -44,7 +44,7 @@ define "Schedule Due Date for MCV dose":
 define "Expected Due Date for MCV dose":
 	case 
 	//when "Needs Zero MCV Dose"
-	//	then Patient.birthDate + 6 months
+	//	then Patient.birthDate + 9 months
 	when "No MCV Doses Administered to Patient"
 		then if "High Transmission Setting" then Patient.birthDate + 9 months else Patient.birthDate + 12 months
 	//when "Second MCV Dose Administered to Patient" is not null and "Needs Supplementary MCV Dose"
@@ -150,7 +150,7 @@ define "Needs Zero MCV Dose":
 	"No MCV Doses Administered to Patient" 
 	  and (
 			if "High Transmission Setting" 
-			then IMMZCom."Current Patient Age In Months" between 6 and 9 
+			then IMMZCom."Current Patient Age In Months" between 9 and 15 
 			else IMMZCom."Current Patient Age In Months" between 6 and 12
 		)
 		and IMMZCom."Date of Latest Live Attenuated Vaccine" +4 weeks <= Now()
@@ -254,7 +254,7 @@ define "Draft Medication Request ID for MCV dose":
 define "Should vaccinate patient for measles (Supplementary) because no doses":
 	IMMZCom."No MCV Doses Administered to Patient" and 
 	(
-		IMMZCom."Current Patient Age In Months" between 6 and 9 and
+		IMMZCom."Current Patient Age In Months" between 9 and 15 and
 		(
 			(
 				IMMZCom."HIV Status" in IMMZc."HIV status - HIV positive Choices" and
